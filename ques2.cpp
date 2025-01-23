@@ -1,127 +1,73 @@
-// #include <bits/stdc++.h>
-// #define int long long
-// using namespace std;
-
-// int32_t main()
-// {
-//     int t;
-//     cin >> t;
-
-//     while (t--)
-//     {
-
-//         int n;
-//         cin >> n;
-
-//         string s;
-//         cin >> s;
-
-//         vector<int>numbers(n) ;
-
-//         map<int , bool>numMap  ;
-
-//         if( s[0] == 's' ||  s[n-1] == 'p' )
-//         {
-//             cout << "YES" << endl  ;
-//             continue ;
-//         }
-
-//     }
-// }
-
 #include <bits/stdc++.h>
-#define int long long
 using namespace std;
 
-int32_t main()
-{
-    int t;
-    cin >> t;
+#define ll long long
+#define endl '\n'
+#define debug(x) cout << #x << " = " << x << endl
 
-    while (t--)
+void solve()
+{   
+    int n ;  
+    cin >> n ; 
+    string s;
+    cin >> s;                   // Read the input string
+    int count_ones = 0;         // To count the number of ones
+    int count_consec_zeros = 0; // To count pairs of consecutive zeros
+    int current_zeros = 0;      // To track current sequence of zeros
+
+    for (char c : s)
     {
-        int n;
-        cin >> n;
-        string s;
-        cin >> s;
-
-        // 2D array for valid position
-        set<int> elements;
-
-        if (s[0] == 's')
+        if (c == '1')
         {
-            s[0] = '.';
-        }
-
-        if (s[n - 1] == 'p')
-        {
-            s[n - 1] = '.';
-        }
-
-        // Disable values based on rules
-        for (int i = 0; i < n; i++)
-        {
-
-            if (s[i] != '.')
+            count_ones++; // Increment count for '1'
+            if (current_zeros > 0)
             {
-
-                elements.insert(s[i]);
-
+                count_consec_zeros++; // Increment count for consecutive zeros
+                current_zeros = 0;    // Reset current zero count
             }
-
         }
-
-        if (elements.size() <= 1)
+        else if (c == '0')
         {
-
-            cout << "YES" << endl  ; 
-
+            current_zeros++; // Increment current zero count
         }
-        else 
-        {
+    }
 
-            cout << "NO" << endl  ;       
+    // Check if there were trailing zeros at the end of the string
+    if (current_zeros > 0)
+    {
+        count_consec_zeros++;
+    }
 
-        }
+    // Output based on the comparison of counts
+    // cout << "cons zeros -> " << count_consec_zeros << endl;
+    // cout << "cons ones ->" << count_ones << endl;
+    if (count_consec_zeros >= count_ones)
+    {
+        cout << "no" << endl;
+    }
+    else
+    {
+        cout << "Yes" << endl;
     }
 }
 
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
+#ifndef ONLINE_JUDGE
+    freopen("D:/CodeForces/input", "r", stdin);
+    freopen("D:/CodeForces/output", "w", stdout);
+#endif
 
+    int t = 1;
+    cin >> t;
+    for (int i = 1; i <= t; ++i)
+    {
+        // cout << "Case #" << i << ": ";
+        solve();
+    }
 
-/*
-
-        int firstIndex = -1;
-        int secondIndex = -1;
-
-        int dotCount = 0;
-
-        for (int i = 0; i < n; i++)
-        {
-            if (s[i] == 'p')
-            {
-
-                firstIndex = 1;
-                secondIndex = i + 1;
-            }
-            else if (s[i] == 's')
-            {
-                firstIndex = i + 1;
-                secondIndex = n;
-            }
-            else if (s[i] == '.')
-            {
-                dotCount++;
-            }
-        }
-
-        if( dotCount == s.length() )
-        {
-            cout << "YES" << endl  ;
-        }
-        else if( firstIndex ==  )
-        {
-
-        }
-
-*/
+    return 0;
+}
