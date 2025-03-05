@@ -2,221 +2,145 @@
 using namespace std;
 
 #define ll long long
+#define int long long 
 #define endl '\n'
 #define debug(x) cout << #x << " = " << x << endl
-// #define int long long 
+#define all(x) begin(x), end(x)
 
-void solve() 
-{  
-
-    long long int n , x  , k ; 
-    cin >> n >> x >> k;
-
-    string s  ;  
-
-    cin >> s  ;  
-
-    long long int startPoint = x ;  
-
-    long long int count  = 0 ;   // count is keeping track of the seconds  
-
-    long long int ans  =  0 ;  
-
-    int indexS = 0; 
-
-    // LRRLL
-    while( indexS < s.length() && count < k   ) 
-    {
-         if( s[indexS] == 'L' )  
-         {
-            startPoint = startPoint - 1  ;
-         }
-
-         else if( s[indexS] == 'R' ) 
-         {
-            startPoint = startPoint + 1   ; 
-         }
-
-         if( startPoint == 0 ) 
-         {
-            ans++ ;  
-            indexS = 0 ;  
-         }
-         else 
-         {
-            indexS++ ;  
-         }
-
-         count++  ;    // count toh hamesha hee ageh barega 
-    }
-
-    cout << ans << endl ;  
-
+bool isPerfectSquare( int num) 
+{
+    int sqrt_val =  sqrt(num);
+    return (sqrt_val * sqrt_val == num);
 }
 
-// void solve2() 
-// { 
+void solve1() 
+{
 
-//     long long int n , x  , k ; 
-//     cin >> n >> x >> k;
+    int n ; 
+    cin >> n  ;  
 
-//     string s  ;  
+    bool swapper =  false   ;   // swapper true matlab tere ko ageh vala element lena hai 
+    int sum = 0  ;  
 
-//     cin >> s  ;  
+    vector<int>ans ;  
 
-//     long long int startPoint = x ;  
-
-//     long long int count  = 0 ;   // count is keeping track of the seconds  
-
-//     int indexS = 0;      
-
-//     bool checker =  false  ;   // jab phele par zero ho jayga tab mai isko false kar dunga 
-    
-//     while( indexS < s.length() && count < k   ) 
-//     {
-//          if( s[indexS] == 'L' )  
-//          {
-//             startPoint = startPoint - 1  ;
-//          }
-
-//          else if( s[indexS] == 'R' ) 
-//          {
-//             startPoint = startPoint + 1   ; 
-//          }
-
-//          if( startPoint == 0 ) 
-//          { 
-//             indexS = 0 ;  
-//             checker =  true  ;   
-//             break ; 
-//          }
-//          else 
-//          {
-//             indexS++ ;  
-//          }
-
-//          count++  ;    // count toh barao jab tak phele bar zero nahi ho jaata 
-//     }    
-
-//     // checker = false iska matlab voh zero huya hee nahi hai 
-
-//     if( checker == false  ) 
-//     {
-//         cout <<  0  << endl ; 
-//         return  ; 
-//     }
-
-//     int netk =  k - count   ; 
-
-//     // let us find the net steps from here 
-
-//     long long int left  = 0   ; 
-//     long long int right = 0   ;
-//     long long int factor  = 0  ;  
-
-//     for( int i = 0 ;  i < n  ;  i++ ) 
-//     {
-//         if( s[i] == 'L') 
-//         {
-//             left =  left + 1  ; 
-//         }
-//         else
-//         {
-//             right  = right + 1 ; 
-//         }
-
-//         if( left == right ) 
-//         {
-//             factor = i + 1  ; 
-//         }
-//     }
-
-//     long long int ans = 1  ; // ek bar toh ho chuka hai 
-
-//     ans += (netk / factor);
-   
-//     cout << ans << endl ;  
-
-// }
-
-void solve2() 
-{ 
-    long long n, x, k; 
-    cin >> n >> x >> k;
-
-    string s;  
-    cin >> s;  
-
-    long long startPoint = x;  
-    long long count = 0;   
-    long long ans = 0;  
-
-    int indexS = 0;      
-    bool checker = false; // Tracks if the robot has reached 0 at least once
-
-    // First, simulate the movement up to k seconds
-    while (indexS < s.length() && count < k) 
+    if( n == 1 ) 
     {
-        if (s[indexS] == 'L')  
-            startPoint--;
-        else if (s[indexS] == 'R') 
-            startPoint++;
+        cout << "-1" << endl  ; 
+        return ; 
+    }
 
-        count++ ;  // ek step ptoh bara na uppar vala     
-        if (startPoint == 0) 
-        {
-            ans++;  
-            indexS = 0;  
-            checker = true;   
-            break; 
-        }
+    // ek test case miss huya hai yeaha konsa 
+
+    int totalSum =  n * ( n + 1 ) / 2  ; 
+//  int totalSum =  n * ( n + 1 ) / 2  ;   1LL seah multiply tab karte jab tumne #define int long long 
+    if( isPerfectSquare( totalSum )  ) 
+    {
+        cout << "-1" << endl ;  
+        return  ; 
+    }
+
+    for( int i = n ; i >= 1  ; i-- ) 
+    {     
+
+        if( swapper == true ) 
+        {   
+            ans.push_back( i + 1 ) ;  
+            sum = sum + ( i + 1 ) ;  
+            swapper = false  ; 
+        } 
         else 
         {
-            indexS++;  
-        } 
-    } 
-   
-    // cout << "ANS AFTER FIRST FIND ->" << ans << endl   ;  
+            sum = sum + i  ;  
+        
 
-    // If zero is never reached, return 0
-    if (!checker) 
-    {
-        cout << 0 << endl; 
-        return;  
-    }
+            if( isPerfectSquare(sum)  ) 
+            {  
+                int num =  i - 1  ;
+                ans.push_back( num ) ;  
+                sum = sum - i + ( i - 1 ) ;  
+                swapper =  true  ;   
+            } 
+            else
+            { 
+                ans.push_back( i ) ; 
+            }
 
-    long long netk = k - count; // Remaining time after reaching 0 once
-    // cout << "NetK ->" << netk << endl ; 
-
-    // Calculate cycle length
-    long long left = 0, right = 0, factor = 0;  
-
-    for (int i = 0; i < n; i++) 
-    { 
-
-        if (s[i] == 'L') 
-            left++; 
-        else
-            right++;
-
-        if (left == right) 
-        {
-            factor = i + 1; 
-            break ; 
         }
 
     }
-    // cout << "factor->" << endl ; 
-    // If a full cycle exists, add the number of full cycles within netk
-    if (factor > 0) 
+
+    for( int i = 0 ;  i < n  ; i++ ) 
     {
-        ans += ( netk / factor) ;  
+
+        cout << ans[i] << " "   ; 
+
     }
 
-    cout << ans << endl;  
+    cout << endl ;  
+
 }
 
-int32_t main() {
+void solve() 
+{
+
+    int n ; 
+    cin >> n ;  
+
+    if( n == 1 ) 
+    {
+        cout << "-1" << endl  ; 
+        return ; 
+    }
+
+    // ek test case miss huya hai yeaha konsa 
+
+    int totalSum = ( n * (n + 1)) / 2;
+
+
+    if( isPerfectSquare( totalSum )  ) 
+    {
+        cout << "-1" << endl ;  
+        return  ; 
+    }
+
+    vector< int>elements ;  
+    
+    for( int i = 1 ;  i <= n ; i++ ) 
+    {
+        elements.push_back( i )  ; 
+    }
+
+    int sum  = 0 ;  
+
+    for( int i = 0 ; i < n  ; i++ ) 
+    {
+        sum = sum + elements[i] ; 
+        
+        if( isPerfectSquare(sum) ) 
+        {
+            sum = sum - elements[i] ; 
+            if (i + 1 < n) {  // Prevent out-of-bounds error
+                swap(elements[i], elements[i + 1]);
+                sum += elements[i];
+            }  
+        }
+
+    }
+    for( int i = 0 ;  i < n  ; i++ ) 
+    {
+
+        cout << elements[i] << " "   ; 
+
+    }
+
+    cout << endl ;  
+
+}
+
+int32_t main() 
+{
+
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
@@ -227,14 +151,13 @@ int32_t main() {
 
     int t = 1;
     cin >> t;
-    for (int i = 1; i <= t; ++i) 
-    {
+    for (int i = 1; i <= t; ++i) {
         // cout << "Case #" << i << ": ";
-        solve2();
+        solve();
     }
 
     return 0;
-}
 
+}
 
 
