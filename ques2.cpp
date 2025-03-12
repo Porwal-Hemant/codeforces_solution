@@ -2,145 +2,83 @@
 using namespace std;
 
 #define ll long long
-#define int long long 
 #define endl '\n'
 #define debug(x) cout << #x << " = " << x << endl
-#define all(x) begin(x), end(x)
 
-bool isPerfectSquare( int num) 
-{
-    int sqrt_val =  sqrt(num);
-    return (sqrt_val * sqrt_val == num);
-}
+// void solve() 
+// {
+//     int n  , k ;
+//     cin >>  n >>  k  ; 
 
-void solve1() 
-{
+//     vector<int>answer  ; 
+    
+//     if( n % 2 == 0 ) 
+//     {
+//         // 8 7 8 7 8 7 8 7 8 7  
 
-    int n ; 
-    cin >> n  ;  
-
-    bool swapper =  false   ;   // swapper true matlab tere ko ageh vala element lena hai 
-    int sum = 0  ;  
-
-    vector<int>ans ;  
-
-    if( n == 1 ) 
-    {
-        cout << "-1" << endl  ; 
-        return ; 
-    }
-
-    // ek test case miss huya hai yeaha konsa 
-
-    int totalSum =  n * ( n + 1 ) / 2  ; 
-//  int totalSum =  n * ( n + 1 ) / 2  ;   1LL seah multiply tab karte jab tumne #define int long long 
-    if( isPerfectSquare( totalSum )  ) 
-    {
-        cout << "-1" << endl ;  
-        return  ; 
-    }
-
-    for( int i = n ; i >= 1  ; i-- ) 
-    {     
-
-        if( swapper == true ) 
-        {   
-            ans.push_back( i + 1 ) ;  
-            sum = sum + ( i + 1 ) ;  
-            swapper = false  ; 
-        } 
-        else 
-        {
-            sum = sum + i  ;  
+//         for( int i =  0 ;  i < n ; i++ ) 
+//         {
+//             if( i % 2 == 0 ) 
+//             {
+//                 answer.push_back( n ) ;  
+//             }
+//             else
+//             {
+//                 answer.push_back( n - 1 ) ;  
+//             }
+//         }
         
+//     }
+//     else 
+//     {
+//         for( int i =  0 ;  i < n ; i++ ) 
+//         {
+//             if( i % 2 == 0 ) 
+//             {
+//                 answer.push_back( n - 1 ) ;  
+//             }
+//             else
+//             {
+//                 answer.push_back( n ) ;  
+//             }
+//         }        
+//     }
 
-            if( isPerfectSquare(sum)  ) 
-            {  
-                int num =  i - 1  ;
-                ans.push_back( num ) ;  
-                sum = sum - i + ( i - 1 ) ;  
-                swapper =  true  ;   
-            } 
-            else
-            { 
-                ans.push_back( i ) ; 
-            }
+//     for( int i = 0 ;  i < n  ;  i++ ) 
+//     {
+//         cout << answer[i] << " "  ;  
+//     } 
 
-        }
+//     cout << endl ;   
 
-    }
-
-    for( int i = 0 ;  i < n  ; i++ ) 
-    {
-
-        cout << ans[i] << " "   ; 
-
-    }
-
-    cout << endl ;  
-
-}
+// }
 
 void solve() 
 {
+    int n, k;
+    cin >> n >> k;
 
-    int n ; 
-    cin >> n ;  
-
-    if( n == 1 ) 
+    if (k % 2 == 0) 
     {
-        cout << "-1" << endl  ; 
-        return ; 
-    }
-
-    // ek test case miss huya hai yeaha konsa 
-
-    int totalSum = ( n * (n + 1)) / 2;
-
-
-    if( isPerfectSquare( totalSum )  ) 
-    {
-        cout << "-1" << endl ;  
-        return  ; 
-    }
-
-    vector< int>elements ;  
-    
-    for( int i = 1 ;  i <= n ; i++ ) 
-    {
-        elements.push_back( i )  ; 
-    }
-
-    int sum  = 0 ;  
-
-    for( int i = 0 ; i < n  ; i++ ) 
-    {
-        sum = sum + elements[i] ; 
-        
-        if( isPerfectSquare(sum) ) 
+        // k is even
+        for (int i = 0; i < n - 2; i++) 
         {
-            sum = sum - elements[i] ; 
-            if (i + 1 < n) {  // Prevent out-of-bounds error
-                swap(elements[i], elements[i + 1]);
-                sum += elements[i];
-            }  
+            cout << (n - 1) << " ";
         }
-
-    }
-    for( int i = 0 ;  i < n  ; i++ ) 
+        cout << n << " " << (n - 1) << endl;
+    } 
+    else 
     {
-
-        cout << elements[i] << " "   ; 
-
+        // k is odd
+        for (int i = 0; i < n - 2; i++) 
+        {
+            cout << n << " ";
+        }
+        cout << n << " " << (n - 1) << endl;
     }
-
-    cout << endl ;  
-
 }
 
-int32_t main() 
-{
-
+int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
@@ -157,7 +95,5 @@ int32_t main()
     }
 
     return 0;
-
 }
-
 

@@ -7,17 +7,33 @@ using namespace std;
 
 void solve() 
 {
-    int k ; 
-    cin >>  k  ; 
+    int n , x ;  
 
-    if( k % 3  == 1 ) 
+    cin >> n >> x ;  
+
+    vector<int>numbers  ;  
+
+    int sum  = 0 ;  
+
+    for( int i = 0 ;  i < n  ; i++ ) 
     {
-        cout << "YES" << endl ; 
+        int x  ; 
+        cin >> x ;   
+
+        numbers.push_back( x ) ;  
+        sum = sum + x ;   
+    }
+
+    if (sum % n == 0 && (sum / n) == x) 
+    {
+        cout << "YES" << endl;
     }
     else 
     {
-        cout << "NO" << endl  ;  
+        cout << "NO" << endl ; 
     }
+
+
 }
 
 int32_t main() {
