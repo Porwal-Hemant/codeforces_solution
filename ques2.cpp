@@ -2,80 +2,49 @@
 using namespace std;
 
 #define ll long long
+#define int long long 
 #define endl '\n'
 #define debug(x) cout << #x << " = " << x << endl
-
-// void solve() 
-// {
-//     int n  , k ;
-//     cin >>  n >>  k  ; 
-
-//     vector<int>answer  ; 
-    
-//     if( n % 2 == 0 ) 
-//     {
-//         // 8 7 8 7 8 7 8 7 8 7  
-
-//         for( int i =  0 ;  i < n ; i++ ) 
-//         {
-//             if( i % 2 == 0 ) 
-//             {
-//                 answer.push_back( n ) ;  
-//             }
-//             else
-//             {
-//                 answer.push_back( n - 1 ) ;  
-//             }
-//         }
-        
-//     }
-//     else 
-//     {
-//         for( int i =  0 ;  i < n ; i++ ) 
-//         {
-//             if( i % 2 == 0 ) 
-//             {
-//                 answer.push_back( n - 1 ) ;  
-//             }
-//             else
-//             {
-//                 answer.push_back( n ) ;  
-//             }
-//         }        
-//     }
-
-//     for( int i = 0 ;  i < n  ;  i++ ) 
-//     {
-//         cout << answer[i] << " "  ;  
-//     } 
-
-//     cout << endl ;   
-
-// }
 
 void solve() 
 {
     int n, k;
     cin >> n >> k;
+    vector<int> a(n);
 
-    if (k % 2 == 0) 
+
+    for (int i = 0; i < n; i++) 
     {
-        // k is even
-        for (int i = 0; i < n - 2; i++) 
-        {
-            cout << (n - 1) << " ";
-        }
-        cout << n << " " << (n - 1) << endl;
+        cin >> a[i];
     } 
-    else 
+ 
+
+
+    // k  >=2 ke liye koe dikkat nahi ho sakte -> 3 element choose karne honge 
+    // k == 1 ke liye dikkat hai 
+
+    if( k == 1 ) 
     {
-        // k is odd
-        for (int i = 0; i < n - 2; i++) 
+        int ans =  a[0] + a[n-1] ;  
+        for( int i = 1 ;  i < n -  1  ; i++ ) 
         {
-            cout << n << " ";
-        }
-        cout << n << " " << (n - 1) << endl;
+            ans = max( ans  ,  a[i] + max( a[0] , a[n-1] )  )  ;  
+        }  
+        cout << ans << endl  ; 
+        return  ; 
     }
+
+    sort(a.rbegin(), a.rend());
+
+    ll sum = 0;
+
+    // Sum of the first k chosen elements
+    for (int i = 0; i < k; i++)
+        sum += a[i];
+
+    ll last_painted = a[k];
+
+    cout << sum + last_painted << endl;
 }
 
 int32_t main() {
@@ -87,13 +56,11 @@ int32_t main() {
     freopen("D:/CodeForces/output", "w", stdout);
 #endif
 
-    int t = 1;
+    int t;
     cin >> t;
-    for (int i = 1; i <= t; ++i) {
-        // cout << "Case #" << i << ": ";
+    while (t--) {
         solve();
     }
 
     return 0;
 }
-
