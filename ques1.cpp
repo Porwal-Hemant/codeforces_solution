@@ -1,106 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long 
+
 #define ll long long
+#define int long long
 #define endl '\n'
 #define debug(x) cout << #x << " = " << x << endl
 
-void solve1() 
-{
-    int n ,  k  ; 
-    cin >> n >> k  ;   
-
-
-    int number = n   ; 
-    int steps =  0 ;  
-
-    while( number >  0  ) 
-    {
-          if( number % 2 == 0 ) 
-          {
-             if( number >=  k ) 
-             {
-                   number = number -  ( k -  1  ) ;  
-                   // even substract minus karna hai 
-             }
-             else 
-             {
-                 number = 0 ;  
-             }
-          }  
-
-          else 
-          {
-             if( number >= k ) 
-             {
-                 number = number -  k  ; 
-             }
-             else 
-             {
-                number = 0 ;  
-             }
-          }
-
-          steps++ ; 
-    }
-
-    cout << steps << endl ;  
-
-}
 
 void solve() 
 {
-    int n , k ;  
-    cin >> n >> k ;  
-    if( n % 2 == 0  && n <= ( k - 1 ) ) 
-    {
-        cout << 1 << endl ; 
-        return   ;  
-    }
+    int x  ;  
+    cin >> x   ;  
 
-    if( n % 2 != 0 && n <= k ) 
-    {
-        cout << 1 << endl ; 
-        return  ;   
-    }
+    int counts = 0 ; 
 
-    if( n % 2 == 0 ) 
-    {
-        // even hai 
+    int number = 0 ;  
 
-        if( n % ( k - 1 ) == 0 ) 
-        {
-            int ans =  n  / ( k - 1 ) ;  
-            cout << ans << endl  ;  
-        }
-        else 
-        {
-            int ans2  = n  / ( k - 1 ) + 1  ; 
-            cout << ans2 << endl  ;  
-        }
+    while( number < x ) 
+    {
+
+        counts = counts + 2  ;  
+
+        number = number * 2 + 1  ;  
 
     }
 
-    else 
-    {
-        // odd ke case mai 
-        
-         int ans = 1  ;   // n = n  - k  
+    counts  = counts  + 1  ;  
 
-         n = n - k  ;     // odd - odd even ho jayga yeaha 
+    cout << counts << endl ;
 
-         if( n % ( k - 1 ) == 0 ) 
-         {
-              ans =  n  / ( k - 1 ) + ans  ;  
-             cout << ans << endl  ;  
-         }
-         else 
-         {
-          ans  = n  / ( k - 1 ) + 1   + ans  ; 
-             cout << ans << endl  ;  
-         }
-
-    }
 }
 
 int32_t main() {
