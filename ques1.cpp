@@ -1,37 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
 #define int long long
+#define ll long long
 #define endl '\n'
 #define debug(x) cout << #x << " = " << x << endl
 
-
 void solve() 
 {
-    int x  ;  
-    cin >> x   ;  
+    int n , x  ;  
+    cin >> n >> x;
 
-    int counts = 0 ; 
+    vector<int> a(n);
 
-    int number = 0 ;  
-
-    while( number < x ) 
-    {
-
-        counts = counts + 2  ;  
-
-        number = number * 2 + 1  ;  
-
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
 
-    counts  = counts  + 1  ;  
 
-    cout << counts << endl ;
+    int firstIndex  = 0 ;  
+
+    bool checker = true  ;  // power can be used  
+
+    while( firstIndex < n ) 
+    {
+         if( a[firstIndex] == 1  ) 
+         {
+             if( checker  == false ) 
+             {
+                cout << "NO" << endl;
+                return;
+             }
+             else{
+                firstIndex = firstIndex + x   ;  
+                checker = false ; // power can be used only once
+
+             }
+         }
+         else 
+         {
+            firstIndex++  ;  
+         }
+    } 
+    
+    cout << "YES" << endl;
+    return;
 
 }
 
-int32_t main() {
+int32_t main() 
+{
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
